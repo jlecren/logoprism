@@ -11,3 +11,19 @@
 *.lai
 *.la
 *.a
+
+# Build folder (usual name)
+build/
+
+# Unpacked libraries (on Windows)
+lib/boost*
+lib/glm*
+lib/gtk+*
+lib/icu*
+lib/yaml*
+lib/SDL*
+
+# Binary files that may appear
+*.pyc
+*.ogv
+*.webm
