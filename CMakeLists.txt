@@ -13,9 +13,19 @@ if(WIN32)
   set(Boost_USE_STATIC_LIBS ON)
   set(BUILD_SHARED_LIBS OFF)
 
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+  if(MINGW)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-elide-constructors -fpermissive -std=c++11 -Wdeprecated-declarations")
+    if(CMAKE_BUILD_TYPE EQUAL Debug)
+	  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
+	endif()
+    set(CMAKE_LINK_LIBRARY_FLAG "-l")
+  else(MINGW)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+	set(CMAKE_LINK_LIBRARY_FLAG "")
+  endif(MINGW)
+  
   add_definitions(-D_USE_MATH_DEFINES -D_WIN32 -DWIN32)
-  set(CMAKE_LINK_LIBRARY_FLAG "")
+  
 
   include(DownloadPango)
   include(DownloadGlm)

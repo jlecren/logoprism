@@ -1,4 +1,4 @@
-set(BOOST_VERSION 1.51.0)
+set(BOOST_VERSION 1.54.0)
 string(REPLACE "." "_" BOOST_VERSION_STRING "${BOOST_VERSION}")
 
 if(DEFINED BOOST_ROOT)
@@ -33,13 +33,21 @@ endif()
 
 if(NOT EXISTS ${BOOST_LIBRARYDIR})
   message(STATUS "Building Boost dependencies...")
+  if(MINGW)
+    set(BOOST_BOOTSTRAP_OPTIONS    mingw)
+    set(BOOST_TOOLSET              "toolset=gcc")
+  else(MINGW)
+    set(BOOST_BOOTSTRAP_OPTIONS    "")
+    set(BOOST_TOOLSET              "")
+  endif(MINGW)
+  
   execute_process(
-    COMMAND bootstrap.bat
+    COMMAND bootstrap.bat ${BOOST_BOOTSTRAP_OPTIONS}
     WORKING_DIRECTORY ${BOOST_ROOT}
   )
   execute_process(
-    COMMAND b2 -sICU_PATH=${ICU_ROOT} -j 4 boost.locale.icu=on debug release link=static --with-program_options --with-filesystem --with-system --with-regex 
-	        --with-thread --with-chrono --with-date_time --with-locale
+    COMMAND b2 -sICU_PATH=${ICU_ROOT} -j 4 ${BOOST_TOOLSET} boost.locale.icu=on debug release link=static --with-program_options --with-filesystem --with-system --with-regex 
+            --with-thread --with-chrono --with-date_time --with-locale
     WORKING_DIRECTORY ${BOOST_ROOT}
   )
 endif()

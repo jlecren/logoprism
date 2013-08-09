@@ -2,7 +2,7 @@ LogO'Prism: Animate your log stream!
 ====================================================================================================
 .. image:: share/icons/hicolor/256x256/logoprism.png
     :alt: LogO'Prism Logo
-    :target: https://prologism.github.io/logoprism
+    :target: https://github.com/prologism/logoprism
 
 
 COMPILING
@@ -72,6 +72,53 @@ LogO'Prism is built. Library artifacts will be stored in the ``lib`` folder.
 
 Use CMake_ to generate the Visual Studio solution, and choose ``Visual Studio 11`` as the generator.
 
+Windows / MinGW32
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On MinGW32, pre-built dependencies will automatically be downloaded by CMake_ the first time
+LogO'Prism is built. Library artifacts will be stored in the ``lib`` folder.
+
+- mingw-get-inst_ to install MinGW with the required packages
+- 7Zip_ is required for dependency automatic download
+- CMake_ >= 2.6.4 is required
+
+Install MinGW and the necessary packages to build the application:
+
+.. code::bash
+
+  mingw-get install gcc g++ mingw32-make msys-bash msys-console msys-awk msys-zlib
+  
+Prepare the build project of LogO'Prism for the MinGW compiler (assuming the cloned repository is in D:\workspace\logoprism):
+
+.. code::bash
+
+  mkdir D:\workspace\logoprism-cdt
+  cd D:\workspace\logoprism-cdt
+  cmake -G "Eclipse CDT4 - MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ..\logoprism
+  
+TIP : You can clean up Boost by deleting the following folders : 
+* D:\workspace\logoprism\lib\boost_1_54_0\build
+* D:\workspace\logoprism\lib\boost_1_54_0\libs
+* D:\workspace\logoprism\lib\boost_1_54_0\more
+* D:\workspace\logoprism\lib\boost_1_54_0\stage
+* D:\workspace\logoprism\lib\boost_1_54_0\status
+* D:\workspace\logoprism\lib\boost_1_54_0\doc
+
+Initialize Pango:
+
+.. code::bash
+
+  cd D:\workspace\logoprism-cdt
+  mkdir etc\pango
+  "D:\workspace\logoprism\lib\gtk+\bin\pango-querymodules.exe" > D:\workspace\logoprism-cdt\etc\pango\pango.modules
+  
+Build LogO'Prism:
+
+.. code::bash
+
+  cd D:\workspace\logoprism-cdt
+  mingw32-make
+
 
 USAGE
 ````````````````````````````````````````````````````````````````````````````````````````````````````
@@ -100,3 +147,4 @@ COPYING INFORMATION
 .. _Homebrew: http://mxcl.github.io/homebrew
 .. _7Zip: http://www.7-zip.org
 .. _XQuartz: http://xquartz.macosforge.org/landing
+.. _mingw-get-inst: http://sourceforge.net/projects/mingw/files/Installer/mingw-get-inst/mingw-get-inst-20120426/mingw-get-inst-20120426.exe/download
