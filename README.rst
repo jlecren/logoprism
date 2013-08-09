@@ -92,6 +92,8 @@ Prepare the build project of LogO'Prism for the MinGW compiler (assuming the clo
 
 .. code:: bash
 
+  cd D:\workspace\logoprism
+  git submodule update --init
   mkdir D:\workspace\logoprism-cdt
   cd D:\workspace\logoprism-cdt
   cmake -G "Eclipse CDT4 - MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ..\logoprism
