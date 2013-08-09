@@ -84,29 +84,29 @@ LogO'Prism is built. Library artifacts will be stored in the ``lib`` folder.
 
 Install MinGW and the necessary packages to build the application:
 
-.. code::bash
+.. code:: bash
 
   mingw-get install gcc g++ mingw32-make msys-bash msys-console msys-awk msys-zlib
   
 Prepare the build project of LogO'Prism for the MinGW compiler (assuming the cloned repository is in D:\workspace\logoprism):
 
-.. code::bash
+.. code:: bash
 
   mkdir D:\workspace\logoprism-cdt
   cd D:\workspace\logoprism-cdt
   cmake -G "Eclipse CDT4 - MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ..\logoprism
   
 TIP : You can clean up Boost by deleting the following folders : 
-* D:\workspace\logoprism\lib\boost_1_54_0\build
-* D:\workspace\logoprism\lib\boost_1_54_0\libs
-* D:\workspace\logoprism\lib\boost_1_54_0\more
-* D:\workspace\logoprism\lib\boost_1_54_0\stage
-* D:\workspace\logoprism\lib\boost_1_54_0\status
-* D:\workspace\logoprism\lib\boost_1_54_0\doc
+- lib\\boost_1_54_0\\bin.v2
+- lib\\boost_1_54_0\\libs
+- lib\\boost_1_54_0\\more
+- lib\\boost_1_54_0\\stage
+- lib\\boost_1_54_0\\status
+- lib\\boost_1_54_0\\doc
 
 Initialize Pango:
 
-.. code::bash
+.. code:: bash
 
   cd D:\workspace\logoprism-cdt
   mkdir etc\pango
@@ -114,7 +114,7 @@ Initialize Pango:
   
 Build LogO'Prism:
 
-.. code::bash
+.. code:: bash
 
   cd D:\workspace\logoprism-cdt
   mingw32-make
