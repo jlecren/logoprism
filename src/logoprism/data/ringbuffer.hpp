@@ -58,11 +58,11 @@ namespace logoprism {
           write_item.item = item;
 
           // TODO: compiler reordering barrier, replace with c++11 std::atomic variables
-#ifdef _WIN32
+#ifdef _MSC_VER
           _ReadWriteBarrier();
-#else // ifdef _WIN32
+#else // ifdef _MSC_VER
           __asm__ __volatile__ ("" ::: "memory");
-#endif // ifdef _WIN32
+#endif // ifdef _MSC_VER
 
           write_item.valid = true;
 
@@ -85,11 +85,11 @@ namespace logoprism {
           item = read_item.item;
 
           // TODO: compiler reordering barrier, replace with c++11 std::atomic variables
-#ifdef _WIN32
+#ifdef _MSC_VER
           _ReadWriteBarrier();
-#else // ifdef _WIN32
+#else // ifdef _MSC_VER
           __asm__ __volatile__ ("" ::: "memory");
-#endif // ifdef _WIN32
+#endif // ifdef _MSC_VER
 
           read_item.valid = false;
 

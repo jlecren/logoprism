@@ -187,10 +187,10 @@ namespace logoprism {
         if (scaling_factor > 1.0)
           pango_font_description_set_size(pango_font, 40 * PANGO_SCALE);
 
-#ifdef _WIN32
+#ifdef _MSC_VER
         if (scaling_factor > 1.0)
           handle.super_sampling_factor = 3.0;
-#endif // ifdef _WIN32
+#endif // ifdef _MSC_VER
 
         pango_context_set_font_description(pango_context, pango_font);
 
@@ -274,7 +274,7 @@ namespace logoprism {
 
         glEnable(GL_TEXTURE_RECTANGLE);
         glBindTexture(GL_TEXTURE_RECTANGLE, handle.texture);
-        glTexImage2D(GL_TEXTURE_RECTANGLE, 0, GL_RGBA8, handle.dimensions.x, handle.dimensions.y, 0, GL_BGRA, GL_UNSIGNED_BYTE, cairo_image_surface_get_data(cairo_surface));
+        glTexImage2D(GL_TEXTURE_RECTANGLE, 0, GL_RGBA8, handle.dimensions.x, handle.dimensions.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, cairo_image_surface_get_data(cairo_surface));
 
         cairo_surface_finish(cairo_surface);
         cairo_surface_write_to_png(cairo_surface, (key + ".png").c_str());
@@ -286,13 +286,13 @@ namespace logoprism {
         pango_font_description_free(pango_font);
         g_object_unref(pango_context);
 
-        glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-        if (!__glGenerateMipmap)
+        /*if (!__glGenerateMipmap)
           __glGenerateMipmap = (PFNGLGENERATEMIPMAPPROC) glfwGetProcAddress("glGenerateMipmap");
         glHint(GL_GENERATE_MIPMAP_HINT, GL_NICEST);
-        __glGenerateMipmap(GL_TEXTURE_RECTANGLE);
+        __glGenerateMipmap(GL_TEXTURE_RECTANGLE);*/
 
         handle.used = true;
         return handle;
