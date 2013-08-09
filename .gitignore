@@ -27,3 +27,4 @@ lib/SDL*
 *.pyc
 *.ogv
 *.webm
+/.project
